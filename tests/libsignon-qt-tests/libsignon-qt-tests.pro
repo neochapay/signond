@@ -10,7 +10,7 @@ QT += \
     testlib
 QT -= gui
 
-LIBS *= -lsignon-qt5
+LIBS *= -lsignon-qt$${QT_MAJOR_VERSION}
 QMAKE_LIBDIR += $${TOP_BUILD_DIR}/lib/SignOn
 QMAKE_RPATHDIR = $${QMAKE_LIBDIR}
 

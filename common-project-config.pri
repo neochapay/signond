@@ -29,8 +29,8 @@ DEFINES += DEBUG_ENABLED
 DEFINES += NO_SIGNON_USER
 
 # Library name for CMake and pkg-config
-LIBSIGNON = libsignon-qt5
-CMAKE_BASENAME = SignOnQt5
+LIBSIGNON = libsignon-qt$${QT_MAJOR_VERSION}
+CMAKE_BASENAME = SignOnQt$${QT_MAJOR_VERSION}
 
 #-----------------------------------------------------------------------------
 # setup the installation prefix

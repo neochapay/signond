@@ -39,7 +39,11 @@
 
 QT_BEGIN_NAMESPACE
 class QString;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using QStringList = class QList<QString>;
+#else
 class QStringList;
+#endif
 class QByteArray;
 class QVariant;
 QT_END_NAMESPACE
@@ -71,6 +75,14 @@ enum AuthPluginState {
                 _instance = static_cast<AuthPluginInterface *>(new pluginclass()); \
             return _instance; \
         }
+
+#ifndef Q_EXTERN_C
+#  ifdef __cplusplus
+#    define Q_EXTERN_C extern "C"
+#  else
+#    define Q_EXTERN_C extern
+#  endif
+#endif
 
 #define SIGNON_DECL_AUTH_PLUGIN(pluginclass) \
         Q_EXTERN_C AuthPluginInterface *auth_plugin_instance() \

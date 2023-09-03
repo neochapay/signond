@@ -24,6 +24,7 @@
 #include "signonsessioncoretools.h"
 
 #include <QDebug>
+#include <QVariantMap>
 #include "signond-common.h"
 
 using namespace SignonDaemonNS;
@@ -39,10 +40,13 @@ QVariantMap SignonDaemonNS::mergeVariantMaps(const QVariantMap &map1,
     QMapIterator<QString, QVariant> it(map2);
     while (it.hasNext()) {
         it.next();
-        if (map.contains(it.key()))
+        if (map.contains(it.key())) {
             map.remove(it.key());
+        }
+        map.insert(it.key(), it.value());
     }
-    return map.unite(map2);
+
+    return map;
 }
 
 /* --------------------- StoreOperation ---------------------- */

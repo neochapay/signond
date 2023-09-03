@@ -2,7 +2,7 @@ include( ../../common-project-config.pri )
 include( ../../common-vars.pri )
 TEMPLATE = lib
 
-TARGET = signon-qt5
+TARGET = signon-qt$${QT_MAJOR_VERSION}
 
 # Input
 public_headers += \

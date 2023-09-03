@@ -104,8 +104,12 @@ bool SignonIdentityInfo::checkMethodAndMechanism(const QString &method,
      * mechanisms is allowed.
      */
     QStringList mechanisms =
-        mechanism.split(QLatin1Char(' '), QString::SkipEmptyParts);
-
+        mechanism.split(QLatin1Char(' ')
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                                             , Qt::SkipEmptyParts);
+#else
+                                             , QString::SkipEmptyParts);
+#endif
     /* if the list is empty of it has only one element, then we already know
      * that it didn't pass the previous checks */
     if (mechanisms.size() <= 1)

@@ -6,7 +6,7 @@ TARGET = identity-ac-helper
 QT += core
 QT -= gui
 
-LIBS += -lsignon-qt5
+LIBS += -lsignon-qt$${QT_MAJOR_VERSION}
 
 QMAKE_LIBDIR += \
     $${TOP_BUILD_DIR}/lib/signond/SignOn \

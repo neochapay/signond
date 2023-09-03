@@ -216,9 +216,13 @@ SignonSessionCore::queryAvailableMechanisms(const QStringList &wantedMechanisms)
 
     if (!wantedMechanisms.size())
         return m_plugin->mechanisms();
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return QSet<QString>(m_plugin->mechanisms().begin(), m_plugin->mechanisms().end()).intersect(
+        QSet<QString>(wantedMechanisms.begin(), wantedMechanisms.end())).values();
+#else
     return m_plugin->mechanisms().toSet().
         intersect(wantedMechanisms.toSet()).toList();
+#endif
 }
 
 void SignonSessionCore::process(const PeerContext &peerContext,

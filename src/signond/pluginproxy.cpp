@@ -125,10 +125,18 @@ PluginProxy::~PluginProxy()
 
             if (!m_process->waitForFinished(PLUGINPROCESS_STOP_TIMEOUT))
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                if (m_process->processId()) {
+#else
                 if (m_process->pid()) {
+#endif
                     qCritical() << "The signon plugin seems to ignore kill(), "
                         "killing it from command line";
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                    QString killProcessCommand(QString::fromLatin1("kill -9 %1").arg(m_process->processId()));
+#else
                     QString killProcessCommand(QString::fromLatin1("kill -9 %1").arg(m_process->pid()));
+#endif
                     QProcess::execute(killProcessCommand);
                 }
             }

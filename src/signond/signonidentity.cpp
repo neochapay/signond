@@ -289,7 +289,11 @@ void SignonIdentity::verifyUser(const QVariantMap &params,
 
     //create ui request to ask password
     QVariantMap uiRequest;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    uiRequest.insert(params);
+#else
     uiRequest.unite(params);
+#endif
     uiRequest.insert(SSOUI_KEY_QUERYPASSWORD, true);
     uiRequest.insert(SSOUI_KEY_USERNAME, info.userName());
     uiRequest.insert(SSOUI_KEY_CAPTION, info.caption());
